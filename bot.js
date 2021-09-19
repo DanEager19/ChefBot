@@ -36,4 +36,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             // Just add any case commands if you want to..
          }
      }
+
 });
+/*bot.on('message', function(user, userID, channelID, message, evt) {
+
+});*/
