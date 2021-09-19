@@ -1,0 +1,8 @@
+{
+    "name": "chef-bot",
+    "version": "1.0.0",
+    "description": "Discord bot for ACC",
+    "main": "bot.js",
+    "author": "Daniel",
+    "dependencies": {}
+}
