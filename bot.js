@@ -29,15 +29,24 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             // !ping
             case 'ping':
                 bot.sendMessage({
-                    to: channelID,
-                    message: 'Pong!'
+                    to: '889222322819567716',
+                    message: '@here Meeting Today!'
                 });
             break;
             // Just add any case commands if you want to..
          }
      }
+});
+bot.on('meeting', function (user, userID, channelID, message, evt) {
+    var msg1 = "Cooking";
+    var msg2 = "Gardening";
+    var location = "TCB Auditorium";
+    //if() { 
+
+        bot.sendMessage({
+            to: channelID,
+            message: ('@here Meeting Today! The ' + msg1 + "meets at 6 PM in the " + location +"!")
+        });
+   // }
 
 });
-/*bot.on('message', function(user, userID, channelID, message, evt) {
-
-});*/
