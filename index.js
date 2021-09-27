@@ -59,7 +59,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         message: ('@here Meeting Today! The ' + meetings.section + ' section meets ' + meetings.day + ' at ' + meetings.time + ' in ' + meetings.location + '!')
                     });
                     console.log('Looping...');
-                }, 5000); 
+                }, 604800000); 
             break;
             case 'loc':
                 if(message.substring(5) == '') {
