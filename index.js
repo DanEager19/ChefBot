@@ -56,7 +56,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     console.log('Sending reminder...');
                     bot.sendMessage({
                         to: '785949800986181724',
-                        message: ('@here Meeting Today! The ' + meetings.section + ' section meets ' + meetings.day + ' at ' + meetings.time + ' in ' + meetings.location + '!')
+                        message: ('Good Morning @here! Meeting Today! The ' + meetings.section + ' section meets ' + meetings.day + ' at ' + meetings.time + ' in ' + meetings.location + '!')
                     });
                     console.log('Looping...');
                 }, 604800000); 
