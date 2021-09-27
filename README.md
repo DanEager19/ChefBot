@@ -8,3 +8,4 @@ Commands:
  - !time - Update the time. Gets the current (set) time if no 2nd argument provided.
  - !day - Update the day. Gets the current (set) day if no 2nd argument provided.
  - !announce - Sends a message to any given channel. 
+ - !stop - Stops the countdown.

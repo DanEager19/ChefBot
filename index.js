@@ -3,10 +3,11 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
-//ChefBot specific objects start
+//Create immutable strings
 const cook = 'Cooking';
 const garden =  'Gardening';
 
+//Create the meeting object
 var meetings = {
     section: new String,
     week: 0,
@@ -15,19 +16,17 @@ var meetings = {
     time: '6PM',
     location: 'EH100'
 }
-//ChefBot specific objects end
 
+//Base code
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
     colorize: true
 });
 logger.level = 'debug';
-
 var bot = new Discord.Client({
    token: auth.token,
    autorun: true
 });
-
 bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
@@ -41,9 +40,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var cmd = args[0];
         args = args.splice(1);
         switch(cmd) {
+            //Starts the countdown
             case 'start':
                 console.log('Starting...')
-                setInterval(() => {
+                timer = setInterval(() => {
+                    //Checks if the cooking or gardening club meetings based on whether the counter is even or odd. 
                     if (meetings.week % 2 == 0) {
                         meetings.section = cook;
                         meetings.week++;
@@ -61,13 +62,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     console.log('Looping...');
                 }, 604800000); 
             break;
+            //Checks and/or updates the location.
             case 'loc':
+                //Checks for empty string                
                 if(message.substring(5) == '') {
                     bot.sendMessage({
                         to: channelID,
                         message: ('Location is: ' + meetings.location)
                     });
                 } else {
+                    //Updates parameter
                     meetings.location = message.substring(5);
                     bot.sendMessage({
                         to: channelID,
@@ -76,13 +80,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
                 console.log('Location is currently ' + meetings.location);            
             break;
+            //Checks and/or updates the time.
             case 'time':
+                //Checks for empty string
                 if(message.substring(6) == '') {
                     bot.sendMessage({
                         to: channelID,
                         message: ('Time is: ' + meetings.time)
                     });
                 } else {
+                    //Updates parameter
                     meetings.time = message.substring(6);
                     bot.sendMessage({
                         to: channelID,
@@ -91,13 +98,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
                 console.log('Time is currently ' + meetings.time);
             break;
+            //Checks and/or updates the day.
             case 'day':
+                //Checks for empty string
                 if(message.substring(5) == '') {
                     bot.sendMessage({
                         to: channelID,
                         message: ('Day is: ' + meetings.day)
                     });
                 } else {
+                    //Updates parameter
                     meetings.day = message.substring(5);
                     bot.sendMessage({
                         to: channelID,
@@ -107,12 +117,22 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 console.log('Day is currently ' + meetings.day)
                 ;
             break;
+            //Sends any additional messages. 
             case 'announce':
                 bot.sendMessage({
                     to: '785949800986181724',
                     message: (message.substring(9))
                 });
                 console.log('Sent ' + message.substring(9) + 'to #Announcements')
+            break;
+            //Stops the interval and therein the countdown. 
+            case 'stop':
+                clearInterval(timer);
+                bot.sendMessage({
+                    to: channelID,
+                    message: ('Stopping...')
+                });
+                console.log('Stopping...')
             break;
          }
      }
