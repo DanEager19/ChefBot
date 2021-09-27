@@ -3,16 +3,19 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
+//ChefBot specific objects start
+const cook = 'Cooking';
+const garden =  'Gardening';
+
 var meetings = {
     section: new String,
     week: 0,
     date: new Date(),
-    cook: "Cooking",
-    garden: "Gardening",
-    day: "Thursday",
-    time: "6PM",
-    location: "EH100"
+    day: 'Thursday',
+    time: '6PM',
+    location: 'EH100'
 }
+//ChefBot specific objects end
 
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
@@ -32,57 +35,85 @@ bot.on('ready', function (evt) {
 });
 
 bot.on('message', function (user, userID, channelID, message, evt) {
+    //Only lets the specified user in the specified channel access controls.
     if (message.substring(0, 1) == '!' && userID == 223248267650007041 && channelID == 889222322819567716) {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
         args = args.splice(1);
         switch(cmd) {
+            case 'start':
+                console.log('Starting...')
+                setInterval(() => {
+                    if (meetings.week % 2 == 0) {
+                        meetings.section = cook;
+                        meetings.week++;
+                        console.log('Meeting counter ' + meetings.week);
+                    } else {
+                        meetings.section = garden;
+                        meetings.week++;
+                        console.log('Meeting counter ' + meetings.week);
+                    }
+                    console.log('Sending reminder...');
+                    bot.sendMessage({
+                        to: '785949800986181724',
+                        message: ('@here Meeting Today! The ' + meetings.section + ' section meets ' + meetings.day + ' at ' + meetings.time + ' in ' + meetings.location + '!')
+                    });
+                    console.log('Looping...');
+                }, 5000); 
+            break;
             case 'loc':
-                meetings.location = message.substring(5);
-                bot.sendMessage({
-                    to: channelID,
-                    message: ("Location set to: " + meetings.location)
-                });
-                console.log(meetings.location);
+                if(message.substring(5) == '') {
+                    bot.sendMessage({
+                        to: channelID,
+                        message: ('Location is: ' + meetings.location)
+                    });
+                } else {
+                    meetings.location = message.substring(5);
+                    bot.sendMessage({
+                        to: channelID,
+                        message: ('Location set to: ' + meetings.location)
+                    });
+                }
+                console.log('Location is currently ' + meetings.location);            
             break;
             case 'time':
-                meetings.time = message.substring(6);
-                bot.sendMessage({
-                    to: channelID,
-                    message: ("Time set to: " + meetings.time)
-                });
-                console.log(meetings.time);
+                if(message.substring(6) == '') {
+                    bot.sendMessage({
+                        to: channelID,
+                        message: ('Time is: ' + meetings.time)
+                    });
+                } else {
+                    meetings.time = message.substring(6);
+                    bot.sendMessage({
+                        to: channelID,
+                        message: ('Time set to: ' + meetings.time)
+                    });
+                }
+                console.log('Time is currently ' + meetings.time);
             break;
             case 'day':
-                meetings.day = message.substring(5);
+                if(message.substring(5) == '') {
+                    bot.sendMessage({
+                        to: channelID,
+                        message: ('Day is: ' + meetings.day)
+                    });
+                } else {
+                    meetings.day = message.substring(5);
+                    bot.sendMessage({
+                        to: channelID,
+                        message: ('Day set to: ' + meetings.day)
+                    });
+                }
+                console.log('Day is currently ' + meetings.day)
+                ;
+            break;
+            case 'announce':
                 bot.sendMessage({
-                    to: channelID,
-                    message: ("Day set to: " + meetings.day)
+                    to: '785949800986181724',
+                    message: (message.substring(9))
                 });
-                console.log(meetings.day);
+                console.log('Sent ' + message.substring(9) + 'to #Announcements')
             break;
          }
      }
-});
-
-bot.on('meetings', function() { 
-    while(true) {
-        console.log("Looped...");
-        if(meetings.date.getDay() == 1) {
-            if (meetings.week % 2 == 0) {
-                meetings.section = meetings.cook;
-                meetings.week++;
-                console.log(meetings.week);
-            } else {
-                meetings.section = meetings.garden;
-                meetings.week++;
-                console.log(meetings.week);
-            }
-            console.log("hi");
-            bot.sendMessage({
-                to: 889222322819567716,
-                message: ('@here Meeting Today! The ${meetings.section} section meets at ${meetings.time} in ${meetings.location}!')
-            });
-        }
-    }
 });
