@@ -50,11 +50,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 timer = setInterval(() => {
                     //Checks if the cooking or gardening club meetings based on whether the counter is even or odd. 
                     if (meetings.week % 2 == 0) {
-                        meetings.section = garden;
+                        meetings.section = cook;
                         meetings.week++;
                         console.log('Meeting counter ' + meetings.week);
                     } else {
-                        meetings.section = cook;
+                        meetings.section = garden;
                         meetings.week++;
                         console.log('Meeting counter ' + meetings.week);
                     }
