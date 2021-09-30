@@ -2,6 +2,7 @@
 Cooking and Gardening Club Discord bot reminder.<br />
 auth.json excluded as it contains sensitive info.<br />
 Node files also excluded to prevent bloat.<br />
+Currently Hosted on a DigitalOcean Droplet<br />
 Commands:
  - !start - Begin the countdown. 
  - !loc - Update the location. Gets the current location if no 2nd argument provided.
