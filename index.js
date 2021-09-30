@@ -2,8 +2,6 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
-//Creates a HTTP server
-require("http").createServer(async (req,res) => { res.statusCode = 200; res.write("ok"); res.end(); }).listen(3000, () => console.log("Now listening on port 3000"));
 
 //Create immutable strings
 const cook = 'Cooking';
@@ -45,6 +43,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             //Starts the countdown
             case 'start':
                 console.log('Starting...')
+                bot.sendMessage({
+                    to: channelID,
+                    message: ('Starting...')
+                });
                 timer = setInterval(() => {
                     //Checks if the cooking or gardening club meetings based on whether the counter is even or odd. 
                     if (meetings.week % 2 == 0) {
