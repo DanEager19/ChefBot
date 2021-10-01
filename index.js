@@ -6,16 +6,16 @@ var auth = require('./auth.json');
 //Create immutable strings
 const cook = 'Cooking';
 const garden =  'Gardening';
-
+const announcements = '785949800986181724'
 //Create the meeting object
 var meetings = {
     section: new String,
     week: 0,
-    date: new Date(),
     day: 'Thursday',
     time: '6PM',
     location: 'EH100'
 }
+var date = new Date();
 
 //Base code
 logger.remove(logger.transports.Console);
@@ -33,39 +33,13 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
-bot.on('message', function (user, userID, channelID, message, evt) {
+bot.once('message', function (user, userID, channelID, message, evt) {
     //Only lets the specified user in the specified channel access controls.
-    if (message.substring(0, 1) == '!' && userID == 223248267650007041 && channelID == 889222322819567716) {
+    if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
         args = args.splice(1);
         switch(cmd) {
-            //Starts the countdown
-            case 'start':
-                console.log('Starting...')
-                bot.sendMessage({
-                    to: channelID,
-                    message: ('Starting...')
-                });
-                timer = setInterval(() => {
-                    //Checks if the cooking or gardening club meetings based on whether the counter is even or odd. 
-                    if (meetings.week % 2 == 0) {
-                        meetings.section = cook;
-                        meetings.week++;
-                        console.log('Meeting counter ' + meetings.week);
-                    } else {
-                        meetings.section = garden;
-                        meetings.week++;
-                        console.log('Meeting counter ' + meetings.week);
-                    }
-                    console.log('Sending reminder...');
-                    bot.sendMessage({
-                        to: '785949800986181724',
-                        message: ('Good Morning @here! Meeting Today! The ' + meetings.section + ' section meets ' + meetings.day + ' at ' + meetings.time + ' in ' + meetings.location + '!')
-                    });
-                    console.log('Looping...');
-                }, 604800000); 
-            break;
             //Checks and/or updates the location.
             case 'loc':
                 //Checks for empty string                
@@ -124,7 +98,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             //Sends any additional messages. 
             case 'announce':
                 bot.sendMessage({
-                    to: '785949800986181724',
+                    to: announcements,
                     message: (message.substring(9))
                 });
                 console.log('Sent ' + message.substring(9) + 'to #Announcements')
@@ -138,6 +112,31 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 });
                 console.log('Stopping...')
             break;
+            case 'start':
+                console.log('Starting...')
+                bot.sendMessage({
+                    to: channelID,
+                    message: ('Starting...')
+                });
+                timer = setInterval(() => {
+                    //Checks if the cooking or gardening club meetings based on whether the counter is even or odd. 
+                    if (meetings.week % 2 == 0) {
+                        meetings.section = cook;
+                        meetings.week++;
+                        console.log('Meeting counter ' + meetings.week);
+                    } else {
+                        meetings.section = garden;
+                        meetings.week++;
+                        console.log('Meeting counter ' + meetings.week);
+                    }
+                    console.log('Sending reminder...');
+                    bot.sendMessage({
+                        to: announcements,
+                        message: ('Good Morning @here! Meeting Today! The ' + meetings.section + ' section meets ' + meetings.day + ' at ' + meetings.time + ' in ' + meetings.location + '!')
+                    });
+                    console.log('Looping...');
+                }, 604800000); 
+        break;
          }
      }
 });
