@@ -4,7 +4,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
 const cook = 'Cooking'
 const garden = 'Gardening'
-const announcements = '889222322819567716'
+const announcements = 889222322819567716
 
 let meetings = {
     section: new String,
