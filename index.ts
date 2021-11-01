@@ -5,7 +5,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const prefix = '!'
 const cook = 'Cooking'
 const garden = 'Gardening'
-const announcements = '889222322819567716'
+const announcements = '785949800986181724'
 
 let meetings = {
     section: new String,
@@ -24,7 +24,7 @@ client.on("messageCreate", async(msg) => {
         else meetings.section = garden
         client.channels.cache
         .get(announcements)
-        .send(`Meeting today! ${meetings.section} is meeting at ${meetings.time} in ${meetings.location}!`)
+        .send(`@here Meeting today! ${meetings.section} is meeting at ${meetings.time} in ${meetings.location}!`)
         meetings.week++
     }, 604800000)
     
