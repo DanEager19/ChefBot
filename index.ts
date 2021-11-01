@@ -3,15 +3,13 @@ const Discord = require('discord.js');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
 const cook = 'Cooking';
-const garden =  'Gardening';
-const announcements = '785949800986181724'
+const garden = 'Gardening';
 
 let meetings = {
     section: new String,
     week: 0,
-    day: 'Thursday',
     time: '6PM',
-    location: 'EH100'
+    location: 'Science Center 121'
 }
 
 client.on("ready", () => {
@@ -19,12 +17,31 @@ client.on("ready", () => {
 })
 
 client.on("messageCreate", msg => {
-    if (msg.content === "ping") {
-        msg.reply("pong")
-    } else if (msg.content === "time") {
-        meetings.time = msg.content;
-        msg.channel.send(`Time updated to ${meetings.time}`)
-        .catch(console.error)
+    const weekly = setInterval( () => {
+        const timeNow = new Date().getTime
+        console.log(`The time is${timeNow}; the message is being sent...`)
+        if(meetings.week % 2 === 0) meetings.section = cook
+        else meetings.section = garden
+        msg.send(`Meeting today! ${meetings.section} is meeting at ${meetings.time} in ${meetings.location}!`)
+        meetings.week++
+    }, 604800000)
+
+    if (msg.content.substr(0,1) === '!') {
+        switch (msg.content.substr(2)) {
+            case 'start':
+                async () => weekly 
+            case 'time':
+                meetings.time = msg.substr(6)
+            case 'loc':
+                meetings.location = msg.substr(5)
+            case 'stop':
+                clearInterval(weekly)
+        }
     }
 })
+
+client.on("error", error =>{
+    console.error(`This error occured: ${error}`)
+})
+
 client.login(process.env.BOT_TOKEN)
