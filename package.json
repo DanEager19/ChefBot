@@ -2,7 +2,7 @@
     "name": "chef-bot",
     "version": "1.0.0",
     "description": "Discord bot for ACC",
-    "main": "bot.js",
+    "main": "index.js",
     "author": "Daniel",
     "dependencies": {
         "@discordjs/builders": "^0.6.0",
@@ -10,7 +10,9 @@
         "discord-api-types": "^0.23.1",
         "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
         "discord.js": "^13.1.0",
+        "dotenv": "^10.0.0",
         "eslint": "^7.32.0",
+        "typescript": "^4.4.4",
         "winston": "^3.3.3"
     }
 }
