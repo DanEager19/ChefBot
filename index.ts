@@ -20,12 +20,17 @@ client.on("ready", () => {
 
 client.on("messageCreate", async(msg) => {
     const weekly = setInterval( () => {
-        if(meetings.week % 2 === 0) meetings.section = cook
-        else meetings.section = garden
+        if(meetings.week === 0) {
+            meetings.section = cook
+            meetings.week++
+        }
+        else {
+            meetings.section = garden
+            meetings.week--
+        }
         client.channels.cache
         .get(announcements)
         .send(`@here Meeting today! ${meetings.section} is meeting at ${meetings.time} in ${meetings.location}!`)
-        meetings.week++
     }, 5000)
     if (!msg.content.startsWith(prefix)) return;
     
