@@ -5,7 +5,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const prefix = '!'
 const cook = 'Cooking'
 const garden = 'Gardening'
-const announcements = '785949800986181724'
+const announcements = '889222322819567716'
 
 let meetings = {
     section: new String,
@@ -19,22 +19,25 @@ client.on("ready", () => {
 })
 
 client.on("messageCreate", async(msg) => {
-    let weekly = setInterval( () => {
+    const weekly = setInterval( () => {
         if(meetings.week % 2 === 0) meetings.section = cook
         else meetings.section = garden
         client.channels.cache
         .get(announcements)
         .send(`@here Meeting today! ${meetings.section} is meeting at ${meetings.time} in ${meetings.location}!`)
         meetings.week++
-    }, 604800000)
-    
+    }, 5000)
     if (!msg.content.startsWith(prefix)) return;
     
     const args = msg.content.trim().split(/ +/g)
     const cmd = args[0].slice(prefix.length).toLowerCase()
     if(cmd === 'start') {
         console.log('Starting...')
-        async () => weekly
+        weekly
+    }
+    if(cmd === 'stop') {
+        console.log('Stopping...')
+        clearInterval(weekly)
     }
 })
 
