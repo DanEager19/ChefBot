@@ -2,6 +2,7 @@ require('dotenv').config()
 const Discord = require('discord.js');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
+
 const prefix = '!'
 const cook = 'Cooking'
 const garden = 'Gardening'
@@ -19,30 +20,26 @@ client.on("ready", () => {
 })
 
 client.on("messageCreate", async(msg) => {
-    const weekly = setInterval( () => {
-        if(meetings.week === 0) {
-            meetings.section = cook
-            meetings.week++
-        }
-        else {
-            meetings.section = garden
-            meetings.week--
-        }
-        client.channels.cache
-        .get(announcements)
-        .send(`@here Meeting today! ${meetings.section} is meeting at ${meetings.time} in ${meetings.location}!`)
-    }, 5000)
+    let weekly
     if (!msg.content.startsWith(prefix)) return;
     
     const args = msg.content.trim().split(/ +/g)
     const cmd = args[0].slice(prefix.length).toLowerCase()
     if(cmd === 'start') {
         console.log('Starting...')
-        weekly
-    }
-    if(cmd === 'stop') {
-        console.log('Stopping...')
-        clearInterval(weekly)
+        weekly = setInterval( () => {
+            if(meetings.week === 0) {
+                meetings.section = cook
+                meetings.week++
+            }
+            else {
+                meetings.section = garden
+                meetings.week--
+            }
+            client.channels.cache
+            .get(announcements)
+            .send(`@here Meeting today! ${meetings.section} section is meeting at ${meetings.time} in ${meetings.location}!`)
+        }, 5000)
     }
 })
 
