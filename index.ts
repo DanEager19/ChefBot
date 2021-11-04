@@ -39,7 +39,7 @@ client.on("messageCreate", async(msg) => {
             client.channels.cache
             .get(announcements)
             .send(`@here Meeting today! ${meetings.section} section is meeting at ${meetings.time} in ${meetings.location}!`)
-        }, 5000)
+        }, 604800000)
     }
 })
 
