@@ -1,6 +1,9 @@
 # ChefBot
 Cooking and Gardening Club Discord bot reminder.<br />
 Currently Hosted on a Raspberry Pi<br />
+
+![Diagram](https://i.imgur.com/cY8VFT7.png)
+
 Commands:
  - !start - Begin the countdown. 
  
