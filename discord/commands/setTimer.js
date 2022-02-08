@@ -6,7 +6,7 @@ module.exports = {
 		.setName('timer')
 		.setDescription('Sets a timer'),
 	async execute(interaction) {
-		await interaction.reply('Pong!');
+		await interaction.reply({ content: 'Pong!', ephemeral: true });
 		await wait(2000);
 		await interaction.followUp('Pong Again!');
 	},
