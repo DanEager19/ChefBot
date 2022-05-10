@@ -1,28 +1,6 @@
 import discord
 from discord.ext import commands
-import calendar
-import datetime
-import schedule
-import time
-
-class EventScheduler:
-    def __init__(self):
-        year = datetime.datetime.now().year
-        print(calendar.calendar(year, 1))
-
-    def event_once(name):
-
-        return schedule.CancelJob
-    async def run():
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-
-event = EventScheduler
-
-def day_selector(day, event):
-    if day == 'Weds':
-        schedule.every().wednesday.at("12:00").do(event.event_once(event))
+from googlesearch import search
 
 bot = commands.Bot(command_prefix='&')
 
@@ -30,33 +8,31 @@ f = open('auth.txt', 'r')
 try:
     token = f.read()
 except FileNotFoundError() as error:
-    print('An error occurred: {error}')
+    print(f'An error occurred: {error}')
 finally:
     f.close()
 
 @bot.event
 async def on_ready():
     print('Logged in as {0.user}'.format(bot))
+    Channel = bot.get_channel(889222322819567716)
+    Text = "Ahaha"
+    Moji = await Channel.send(Text)
+    await Moji.add_reaction('🍔')
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    channel = bot.get_channel(889222322819567716)
+    if reaction.message.channel.id != channel.id:
+        return
+    if reaction.emoji == '🍔':
+        Role = discord.utils.get(user.server.roles, name="Cooks")
+        await user.add_roles(Role)
 
 @bot.command()
-async def test(ctx, *args):
-    await ctx.send('Hello!')
-    time.sleep(5.5)
-    arguments = ', '.join(args)
-    await ctx.send(f'{len(args)} Args: {arguments}')
-
-@bot.command()
-async def persona(ctx):
-    await ctx.send('I\'ll reveal your true form!')
-
-@bot.command()
-async def schedule(ctx, reps, day, event_name):
-    if reps == 'once':
-        day_selector(day, event_name)
-    elif reps == 'weekly':
-        await ctx.send('Weekly')
-    elif reps == 'monthly':
-        await ctx.send('Monthly')
-
+async def recipe(ctx, name):
+    query = f"Recipes with {name}"
+    for j in search(query, tld="co.in", num=5, stop=5, pause=2):
+        await ctx.send(f"<{j}>")
 
 bot.run(token)
