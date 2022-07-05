@@ -1,0 +1,19 @@
+{
+  "name": "chef-bot",
+  "version": "1.0.0",
+  "description": "Cooking and Gardening Club Discord bot reminder.<br />\r Currently Hosted on a Raspberry Pi<br />",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/bot.ts"
+  },
+  "dependencies": {
+    "discord.js": "^13.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.1",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}

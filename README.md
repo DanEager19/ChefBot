@@ -1,4 +1,4 @@
-# ChefBot
-Cooking and Gardening Club Discord bot reminder.<br />
-Currently Hosted on a Raspberry Pi<br />
-
+Post twitter posts
+Post scheduleded meetings
+Post instagram posts
+Role reactions

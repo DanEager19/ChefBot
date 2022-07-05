@@ -1,3 +1,5 @@
-__pycache__
-auth.txt
-.google-cookie
+node_modules
+dist
+
+auth.json
+twitter.txt
