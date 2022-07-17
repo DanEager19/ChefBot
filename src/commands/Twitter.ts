@@ -1,16 +1,17 @@
-import { BaseCommandInteraction, Client } from "discord.js";
-import { Command } from "../command";
+import { MessageEmbed } from "discord.js";
 
-export const Twitter: Command = {
-    name: "twitter",
-    description: "Returns the cooking/gardening twitter",
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
-        const content = "<https://twitter.com/DSUCookGarden>";
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const axios = require('axios')
 
-        await interaction.followUp({
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName('twitter')
+        .setDescription('Returns Cooking/Gardening club twitter'),
+    async execute(interaction:any) {
+        const content = '<twitter>'
+        await interaction.reply({
             ephemeral: true,
             content
         });
-    }
+    }   
 }

@@ -1,27 +1,28 @@
-import { BaseCommandInteraction, Client } from "discord.js";
-import { Command } from "../command";
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { MessageEmbed } from "discord.js";;
 const axios = require('axios')
 
-export const GetItems: Command = {
-    name: "getitems",
-    description: "Returns all available items.",
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName('getitems')
+        .setDescription('Returns all available items.'),
+    async execute(interaction:any) {
         axios.get('http://localhost:3000/items')
             .then( async(res: any) => {
-                let content: string = '';
+                const embededList = new MessageEmbed()
+                    .setTitle('Current Inventory');
                 const rows: any = res.data;
 
                 for (let row of rows) {
-                    content += `ID: ${row.id} Name: ${row.name} Description: ${row.description} Inventory: ${row.inventory}\n`;
+                    embededList.addField(`${row.name}`, `ID: ${row.id}\n Description: ${row.description}\n Inventory: ${row.inventory}\n`)
                 }
-                
-                await interaction.followUp({
-                    ephemeral: true,
-                    content
+
+                await interaction.reply({
+                    embeds: [embededList]
                 });
             }).catch((e: Error) => {
-                console.log(`[E] - ${e}`);
+                console.log(`[X] - ${e}`);
             });
     }
+        
 }
