@@ -4,15 +4,18 @@
   "description": "Cooking and Gardening Club Discord bot reminder.<br />\r Currently Hosted on a Raspberry Pi<br />",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/bot.ts"
+    "start": "nodemon src/bot.ts"
   },
   "dependencies": {
-    "discord.js": "^13.8.1"
+    "discord.js": "^13.8.1",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@types/node": "^18.0.1",
     "@typescript-eslint/parser": "^5.30.5",
+    "axios": "^0.27.2",
     "eslint": "^8.19.0",
+    "nodemon": "^2.0.19",
     "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
   }
