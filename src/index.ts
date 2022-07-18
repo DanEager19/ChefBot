@@ -1,10 +1,11 @@
 const { Client,  Collection, Intents } = require("discord.js");
 import { token } from "./auth.json";
-import { deployCommands } from "./deploy-commands";
+
 const fs = require('node:fs');
 const path = require('node:path');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
@@ -42,7 +43,5 @@ client.on('interactionCreate', async (interaction: any) => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
-
-deployCommands
 
 client.login(token);
