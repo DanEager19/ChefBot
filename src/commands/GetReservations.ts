@@ -4,17 +4,23 @@ const axios = require('axios')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('getitems')
-        .setDescription('Returns all available items.'),
+        .setName('getreservations')
+        .setDescription('Returns all current reservations.'),
     async execute(interaction:any) {
-        axios.get('http://localhost:3000/items')
+        axios.get('http://localhost:3000/reserve')
             .then( async(res: any) => {
                 const embededList = new MessageEmbed()
-                    .setTitle('Current Inventory');
+                    .setTitle('Current Reservations');
                 const rows: any = res.data;
 
                 for (let row of rows) {
-                    embededList.addField(`${row.name}`, `ID: ${row.id}\n Description: ${row.description}\n Inventory: ${row.inventory}\n`)
+                    embededList.addField(`${row.email}`, 
+                    `ID: ${row.id}\n 
+                        Item: ${row.itemname}\n
+                        Start Date: ${row.startdate}\n 
+                        End Date: ${row.enddate}\n
+                        Returned?: ${row.returned}\n
+                    `)
                 }
 
                 await interaction.reply({

@@ -13,13 +13,17 @@ module.exports = {
                 email: interaction.options.getString('email')
             })
             .then(async(res: any) => {
-                const content = JSON.stringify(res.data);
+                const content = res.data;
                 await interaction.reply({
                     content
                 });
             })
-            .catch((e: Error) => {
-                console.log(`[X] - ${e}`);
+            .catch(async (e: any) => {
+                const content = e.response.data;
+                await interaction.reply({
+                    content
+                });
+                console.log(`[X] - ${e.response.data}`);
             });
     }
         
