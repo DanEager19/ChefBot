@@ -14,7 +14,11 @@ module.exports = {
                 const rows: any = res.data;
 
                 for (let row of rows) {
-                    embededList.addField(`${row.name}`, `ID: ${row.id}\n Description: ${row.description}\n Inventory: ${row.inventory}\n`)
+                    embededList.addField(`${row.name}`, 
+                    `ID: ${row.id}
+                        Description: ${row.description}
+                        Inventory: ${row.inventory}
+                    `)
                 }
 
                 await interaction.reply({

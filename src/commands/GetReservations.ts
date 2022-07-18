@@ -15,11 +15,11 @@ module.exports = {
 
                 for (let row of rows) {
                     embededList.addField(`${row.email}`, 
-                    `ID: ${row.id}\n 
-                        Item: ${row.itemname}\n
-                        Start Date: ${row.startdate}\n 
-                        End Date: ${row.enddate}\n
-                        Returned?: ${row.returned}\n
+                    `ID: ${row.id} 
+                        Item: ${row.itemname}
+                        Start Date: ${row.startdate} 
+                        End Date: ${row.enddate}
+                        Returned?: ${row.returned}
                     `)
                 }
 
