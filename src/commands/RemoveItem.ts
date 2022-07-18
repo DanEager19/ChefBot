@@ -21,7 +21,7 @@ module.exports = {
                 await interaction.reply({
                     content
                 });
-                console.log(`[X] - ${e.response.data}`);
+                console.log(`[x] - ${e.response.data}`);
             });
     }
 }

@@ -4,7 +4,7 @@ import { token } from "./auth.json";
 const fs = require('node:fs');
 const path = require('node:path');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
 
 
 client.commands = new Collection();
@@ -38,8 +38,8 @@ client.on('interactionCreate', async (interaction: any) => {
 
 	try {
 		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
+	} catch (e) {
+		console.log(`[x] - ${e}`);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });

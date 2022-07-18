@@ -9,18 +9,11 @@ module.exports = {
     async execute(interaction:any) {
         axios.get('http://localhost:3000/reserve')
             .then( async(res: any) => {
-                const embededList = new MessageEmbed()
-                    .setTitle('Current Reservations');
+                const embededList = new MessageEmbed().setTitle('Current Reservations');
                 const rows: any = res.data;
 
                 for (let row of rows) {
-                    embededList.addField(`${row.email}`, 
-                    `ID: ${row.id} 
-                        Item: ${row.itemname}
-                        Start Date: ${row.startdate} 
-                        End Date: ${row.enddate}
-                        Returned?: ${row.returned}
-                    `)
+                    embededList.addField(`${row.email}`, `ID: ${row.id}\nItem: ${row.itemname}\nStart Date: ${row.startdate}\nEnd Date: ${row.enddate}\nReturned?: ${row.returned}`);
                 }
 
                 await interaction.reply({
@@ -32,7 +25,7 @@ module.exports = {
                 await interaction.reply({
                     content
                 });
-                console.log(`[X] - ${e.response.data}`);
+                console.log(`[x] - ${e.response.data}`);
             });
     }
         
