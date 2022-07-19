@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { BaseCommandInteraction } from "discord.js";
 const axios = require('axios')
 
 module.exports = {
