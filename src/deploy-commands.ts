@@ -1,8 +1,8 @@
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require('./auth.json');
-const fs = require('node:fs');
-const path = require('node:path');
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
+import { clientId, guildId, token } from './auth.json';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 const commands = [];
 const commandsPath = path.join(__dirname, 'commands');

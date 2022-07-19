@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { MessageEmbed, BaseCommandInteraction } from "discord.js";
 const axios = require('axios')
 
-module.exports = {
+export = {
     data: new SlashCommandBuilder()
         .setName('getitems')
         .setDescription('Returns all available items.'),

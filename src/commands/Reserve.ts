@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 const axios = require('axios')
 
-module.exports = {
+export = {
     data: new SlashCommandBuilder()
         .setName('reserve')
         .setDescription('Reserve an item based on ID.')

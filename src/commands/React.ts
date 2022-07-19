@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { Base, BaseCommandInteraction} from 'discord.js'
 
-module.exports = {
+export = {
 	data: new SlashCommandBuilder()
         .setName('react')
         .setDescription('Allows for member reactions'),

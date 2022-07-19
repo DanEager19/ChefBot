@@ -1,8 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";;
-const axios = require('axios')
 
-module.exports = {
+export = {
     data: new SlashCommandBuilder()
         .setName('monadomonday')
         .setDescription('Returns monado monday.'),

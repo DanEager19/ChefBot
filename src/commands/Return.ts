@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 const axios = require('axios')
 
-module.exports = {
+export = {
     data: new SlashCommandBuilder()
         .setName('return')
         .setDescription('Return an item based on order ID.')
