@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { CommandInteraction } from "discord.js";
 const axios = require('axios')
 
 export = {
@@ -6,7 +7,7 @@ export = {
         .setName('removeitem')
         .setDescription('Update an item in inventory.')
         .addIntegerOption((option) => option.setName('id').setDescription('Enter item ID.')),
-    async execute(interaction:any) {
+    async execute(interaction: CommandInteraction) {
         axios.delete('http://localhost:3000/items', {
                 id: interaction.options.getInteger('id')
             })

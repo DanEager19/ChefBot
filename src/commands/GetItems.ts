@@ -1,12 +1,12 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed, BaseCommandInteraction } from "discord.js";
+import { MessageEmbed, CommandInteraction } from "discord.js";
 const axios = require('axios')
 
 export = {
     data: new SlashCommandBuilder()
         .setName('getitems')
         .setDescription('Returns all available items.'),
-    async execute(interaction: BaseCommandInteraction) {
+    async execute(interaction: CommandInteraction) {
         axios.get('http://localhost:3000/items')
             .then( async(res: any) => {
                 const embededList = new MessageEmbed().setTitle('Current Inventory');

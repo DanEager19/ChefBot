@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { CommandInteraction } from "discord.js";
 const axios = require('axios')
 
 export = {
@@ -9,7 +10,7 @@ export = {
         .addStringOption((option) => option.setName('name').setDescription('Enter item name.'))
         .addStringOption((option) => option.setName('description').setDescription('Enter item description.'))
         .addIntegerOption((option) => option.setName('inventory').setDescription('Enter item inventory.')),
-    async execute(interaction:any) {
+    async execute(interaction: CommandInteraction) {
         axios.put('http://localhost:3000/items', {
                 id: interaction.options.getInteger('id'),
                 name: interaction.options.getString('name'),

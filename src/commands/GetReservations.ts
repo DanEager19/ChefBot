@@ -1,12 +1,12 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageEmbed } from "discord.js";;
+import { CommandInteraction, MessageEmbed } from "discord.js";
 const axios = require('axios')
 
 export = {
     data: new SlashCommandBuilder()
         .setName('getreservations')
         .setDescription('Returns all current reservations.'),
-    async execute(interaction:any) {
+    async execute(interaction: CommandInteraction) {
         axios.get('http://localhost:3000/reserve')
             .then( async(res: any) => {
                 const embededList = new MessageEmbed().setTitle('Current Reservations');

@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { CommandInteraction } from "discord.js";
 const axios = require('axios')
 
 export = {
@@ -7,7 +8,7 @@ export = {
         .setDescription('Reserve an item based on ID.')
         .addIntegerOption((option) => option.setName('id').setDescription('Enter item ID.'))
         .addStringOption((option) => option.setName('email').setDescription('Enter your email.')),
-    async execute(interaction:any) {
+    async execute(interaction: CommandInteraction) {
         axios.post('http://localhost:3000/reserve', {
                 itemId: interaction.options.getInteger('id'),
                 email: interaction.options.getString('email')

@@ -1,10 +1,11 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { CommandInteraction } from "discord.js";
 
 export = {
 	data: new SlashCommandBuilder()
         .setName('react')
         .setDescription('Allows for member role reactions'),
-	async execute(interaction: any) {
+	async execute(interaction: CommandInteraction) {
         if (interaction.user.bot) return;
         const content = 'Done!';
         await interaction.reply({content, ephemeral: true})
@@ -26,7 +27,7 @@ export = {
 
         collector?.on('collect', async(reaction:any, user:any) => {
             const { guild } = reaction.message 
-            const member = guild.members.cache.find((member: { id: any; }) => member.id === user.id);
+            const member = guild.members.cache.find((member: { id: string; }) => member.id === user.id);
             if (reaction.emoji.name === '🍽') {
                 const role = reaction.message.guild.roles.cache.find((r: { id: string; }) => r.id === '785959812475256832');
                 member.roles.add(role);
@@ -46,7 +47,7 @@ export = {
             }
         });
         
-        collector.on('end', () => {
+        collector?.on('end', () => {
             console.log(`Collection of role reactions has ended.`);
         });
     },
