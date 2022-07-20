@@ -1,5 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import dotenv from 'dotenv';
+dotenv.config()
 const axios = require('axios')
 
 export const GetReservations = {
@@ -7,7 +9,7 @@ export const GetReservations = {
         .setName('getreservations')
         .setDescription('Returns all current reservations.'),
     async execute(interaction: CommandInteraction) {
-        axios.get('http://localhost:3000/reserve')
+        axios.get(`http://${process.env.EXPRESS_SERVER}/reserve`)
             .then( async(res: any) => {
                 const embededList = new MessageEmbed().setTitle('Current Reservations');
                 const rows: any = res.data;

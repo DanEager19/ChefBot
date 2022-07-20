@@ -1,5 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
+import dotenv from 'dotenv';
+dotenv.config()
 const axios = require('axios')
 
 export const Return = {
@@ -8,7 +10,7 @@ export const Return = {
         .setDescription('Return an item based on order ID.')
         .addIntegerOption((option) => option.setName('id').setDescription('Enter item ID.')),
     async execute(interaction: CommandInteraction) {
-        axios.post('http://localhost:3000/return', {
+        axios.post(`http://${process.env.EXPRESS_SERVER}/return`, {
                 id: interaction.options.getInteger('id')
             })
             .then(async(res: any) => {

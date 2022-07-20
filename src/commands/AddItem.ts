@@ -1,6 +1,9 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction  } from "discord.js";
+import dotenv from 'dotenv';
+dotenv.config()
 const axios = require('axios')
+
 
 export const AddItem =  {
     data: new SlashCommandBuilder()
@@ -10,7 +13,7 @@ export const AddItem =  {
         .addStringOption((option) => option.setName('description').setDescription('Enter item description.'))
         .addIntegerOption((option) => option.setName('inventory').setDescription('Enter item inventory.')),
     async execute(interaction: CommandInteraction) {
-        axios.post('http://localhost:3000/items', {
+        axios.post(`http://${process.env.EXPRESS_SERVER}/items`, {
                 name: interaction.options.getString('name'),
                 description: interaction.options.getString('description'),
                 inventory: interaction.options.getInteger('inventory')

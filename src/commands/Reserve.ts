@@ -1,5 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
+import dotenv from 'dotenv';
+dotenv.config()
 const axios = require('axios')
 
 export const Reserve = {
@@ -9,7 +11,7 @@ export const Reserve = {
         .addIntegerOption((option) => option.setName('id').setDescription('Enter item ID.'))
         .addStringOption((option) => option.setName('email').setDescription('Enter your email.')),
     async execute(interaction: CommandInteraction) {
-        axios.post('http://localhost:3000/reserve', {
+        axios.post(`http://${process.env.EXPRESS_SERVER}/reserve`, {
                 itemId: interaction.options.getInteger('id'),
                 email: interaction.options.getString('email')
             })
