@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 
-export = {
+export const MonadoMonday = {
     data: new SlashCommandBuilder()
         .setName('monadomonday')
         .setDescription('Returns monado monday.'),

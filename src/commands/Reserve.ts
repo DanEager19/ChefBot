@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 const axios = require('axios')
 
-export = {
+export const Reserve = {
     data: new SlashCommandBuilder()
         .setName('reserve')
         .setDescription('Reserve an item based on ID.')

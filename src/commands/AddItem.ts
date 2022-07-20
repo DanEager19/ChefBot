@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction  } from "discord.js";
 const axios = require('axios')
 
-export = {
+export const AddItem =  {
     data: new SlashCommandBuilder()
         .setName('additem')
         .setDescription('Add an item into inventory.')

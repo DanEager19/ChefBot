@@ -1,16 +1,11 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { clientId, guildId, token } from './auth.json';
-import * as fs from 'node:fs';
-import * as path from 'node:path';
 
+import { commandFiles } from "./commands";
 const commands = [];
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter((file:any) => file.endsWith('.ts'));
 
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-	const command: any = require(filePath);
+for (const command of commandFiles) {
 	commands.push(command.data.toJSON());
 }
 

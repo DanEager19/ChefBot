@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 
-export = {
+export const RoleReact = {
 	data: new SlashCommandBuilder()
         .setName('rolereact')
         .setDescription('Allows for member role reactions'),

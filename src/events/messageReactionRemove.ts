@@ -1,4 +1,4 @@
-export = {
+export const MessageReactionRemove = {
 	name: 'messageReactionRemove',
 	execute(reaction: any, user: any) {
         const rExp: RegExp = /React with an emoji for the corresponding role!/;

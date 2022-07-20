@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
 const axios = require('axios')
 
-export = {
+export const GetReservations = {
     data: new SlashCommandBuilder()
         .setName('getreservations')
         .setDescription('Returns all current reservations.'),

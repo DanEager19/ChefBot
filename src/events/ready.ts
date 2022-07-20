@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 
-export = {
+export const Ready = {
 	name: 'ready',
 	once: true,
 	execute(client: Client) {

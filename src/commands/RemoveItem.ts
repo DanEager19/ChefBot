@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 const axios = require('axios')
 
-export = {
+export const Removeitem = {
     data: new SlashCommandBuilder()
         .setName('removeitem')
         .setDescription('Update an item in inventory.')
