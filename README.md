@@ -4,4 +4,4 @@ Post instagram posts
 Role reactions
 
 Roadmap
-Finsih Role Reactions -> Strongly type -> Twitter/Insta intergration -> Google Sheets intergration
+Twitter/Insta intergration -> Google Sheets intergration
