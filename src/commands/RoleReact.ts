@@ -3,7 +3,7 @@ import { CommandInteraction } from "discord.js";
 
 export = {
 	data: new SlashCommandBuilder()
-        .setName('react')
+        .setName('rolereact')
         .setDescription('Allows for member role reactions'),
 	async execute(interaction: CommandInteraction) {
         if (interaction.user.bot) return;
