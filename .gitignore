@@ -4,5 +4,3 @@ dist
 auth.json
 twitter.json
 .env
-terraform.tfvars
-.terraform
