@@ -15,16 +15,18 @@ export const Return = {
             })
             .then(async(res: any) => {
                 const content = res.data;
+                console.log(`[-] - ${interaction.user.tag} returned an item.`)
                 await interaction.reply({
                     content
                 });
             })
             .catch(async (e: any) => {
-                const content = e.response.data;
+                let content: any;
+                e.response.data ? content = e.response.data : content = e;
+                console.log(`[x] - ${content}`);
                 await interaction.reply({
                     content
                 });
-                console.log(`[x] - ${e.response.data}`);
             });
     }
 }

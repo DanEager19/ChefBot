@@ -8,6 +8,7 @@ const commands = new Collection();
 
 for (const command of commandFiles) {
 	commands.set(command.data.name, command);
+	console.log(`[+] - Set command ${command.data.name}.`)
 }
 
 for (const event of eventFiles) {
@@ -16,6 +17,7 @@ for (const event of eventFiles) {
 	} else {
 		client.on(event.name, (...args: any) => event.execute(...args));
 	}
+	console.log(`[+] - Set event ${event.name}.`)
 }
 
 client.on('interactionCreate', async (interaction: any) => {

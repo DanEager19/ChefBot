@@ -18,16 +18,18 @@ export const GetReservations = {
                     embededList.addField(`${row.email}`, `ID: ${row.id}\nItem: ${row.itemname}\nStart Date: ${row.startdate}\nEnd Date: ${row.enddate}\nReturned?: ${row.returned}`);
                 }
 
+                console.log(`[~] - ${interaction.user.tag} requested all reservations.`)
                 await interaction.reply({
                     embeds: [embededList]
                 });
             })
             .catch(async (e: any) => {
-                const content = e.response.data;
+                let content: any;
+                e.response.data ? content = e.response.data : content = e;
+                console.log(`[x] - ${content}`);
                 await interaction.reply({
                     content
                 });
-                console.log(`[x] - ${e.response.data}`);
             });
     }
         

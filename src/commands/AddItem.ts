@@ -19,18 +19,19 @@ export const AddItem =  {
                 inventory: interaction.options.getInteger('inventory')
             })
             .then(async(res: any) => {
+                console.log(`[+] - ${interaction.user.tag} created a new item.`)
                 const content = res.data;
                 await interaction.reply({
                     content
                 });
             })
             .catch(async (e: any) => {
-                console.log(e)
-                const content = e.response.data;
+                let content: any;
+                e.response.data ? content = e.response.data : content = e;
+                console.log(`[x] - ${content}`);
                 await interaction.reply({
                     content
                 });
-                console.log(`[x] - ${e.response.data}`);
             });
     }
 }
