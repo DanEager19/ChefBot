@@ -42,7 +42,7 @@ export const AddItem =  {
                 .catch(async (e: any) => {
                     let content: any;
                     e.response ? content = e.response.data : content = e.toString();
-                    console.log(`[x] - Error: ${content}`);
+                    console.log(`[x] - ${content}`);
                     await interaction.reply({
                         content
                     });

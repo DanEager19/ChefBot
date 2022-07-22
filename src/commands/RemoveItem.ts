@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config()
 const axios = require('axios')
 
-export const Removeitem = {
+export const RemoveItem = {
     data: new SlashCommandBuilder()
         .setName('removeitem')
-        .setDescription('Update an item in inventory.')
+        .setDescription('Remove an item from inventory.')
         .addIntegerOption((option) => option.setName('id').setDescription('Enter item ID.')),
     async execute(interaction: CommandInteraction) {
         const member = interaction.guild?.members.cache
@@ -25,7 +25,7 @@ export const Removeitem = {
             });
         } else {
             axios.delete(`http://${process.env.EXPRESS_SERVER}/items`, {
-                    id: interaction.options.getInteger('id')
+                    data: { id: interaction.options.getInteger('id') }
                 })
                 .then(async(res: any) => {
                     const content = res.data;
@@ -37,7 +37,7 @@ export const Removeitem = {
                 .catch(async (e: any) => {
                     let content: any;
                     e.response ? content = e.response.data : content = e.toString();
-                    console.log(`[x] - Error: ${content}`);
+                    console.log(`[x] - ${content}`);
                     await interaction.reply({
                         content
                     });

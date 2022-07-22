@@ -2,7 +2,7 @@ import { AddItem } from "./commands/AddItem";
 import { GetItems } from "./commands/GetItems";
 import { GetReservations } from "./commands/GetReservations";
 import { MonadoMonday } from "./commands/MonadoMonday";
-import { Removeitem } from "./commands/RemoveItem";
+import { RemoveItem } from "./commands/RemoveItem";
 import { Reserve } from "./commands/Reserve";
 import { Return } from "./commands/Return";
 import { RoleReact } from "./commands/RoleReact";
@@ -14,7 +14,7 @@ export const commandFiles = [
     GetItems, 
     GetReservations, 
     MonadoMonday, 
-    Removeitem,
+    RemoveItem,
     Reserve,
     Return,
     RoleReact,
