@@ -24,8 +24,8 @@ export const Reserve = {
             })
             .catch(async (e: any) => {
                 let content: any;
-                e.response.data ? content = e.response.data : content = e;
-                console.log(`[x] - ${content}`);
+                e.response ? content = e.response.data : content = e.toString();
+                console.log(`[x] - Error: ${content}`);
                 await interaction.reply({
                     content
                 });

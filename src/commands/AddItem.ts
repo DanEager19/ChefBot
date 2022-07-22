@@ -13,25 +13,40 @@ export const AddItem =  {
         .addStringOption((option) => option.setName('description').setDescription('Enter item description.'))
         .addIntegerOption((option) => option.setName('inventory').setDescription('Enter item inventory.')),
     async execute(interaction: CommandInteraction) {
-        axios.post(`http://${process.env.EXPRESS_SERVER}/items`, {
-                name: interaction.options.getString('name'),
-                description: interaction.options.getString('description'),
-                inventory: interaction.options.getInteger('inventory')
-            })
-            .then(async(res: any) => {
-                console.log(`[+] - ${interaction.user.tag} created a new item.`)
-                const content = res.data;
-                await interaction.reply({
-                    content
-                });
-            })
-            .catch(async (e: any) => {
-                let content: any;
-                e.response.data ? content = e.response.data : content = e;
-                console.log(`[x] - ${content}`);
-                await interaction.reply({
-                    content
-                });
+        const member = interaction.guild?.members.cache
+            .find((member: { id: string; }) => member.id === interaction.user.id);
+
+        const officerRole = member?.roles.cache.get('785951435829149827');
+        const adminRole = member?.roles.cache.get('785964719914614814');
+
+        if(typeof(adminRole) === 'undefined' && typeof(officerRole) === 'undefined') {
+            const content = 'Sorry! You don\'t have access to this command!';
+            console.log(`[x] - ${interaction.user.tag} tried to use the additem command.`);
+            await interaction.reply({
+                content,
+                ephemeral: true
             });
+        } else {
+            axios.post(`http://${process.env.EXPRESS_SERVER}/items`, {
+                    name: interaction.options.getString('name'),
+                    description: interaction.options.getString('description'),
+                    inventory: interaction.options.getInteger('inventory')
+                })
+                .then(async(res: any) => {
+                    console.log(`[+] - ${interaction.user.tag} created a new item.`)
+                    const content = res.data;
+                    await interaction.reply({
+                        content
+                    });
+                })
+                .catch(async (e: any) => {
+                    let content: any;
+                    e.response ? content = e.response.data : content = e.toString();
+                    console.log(`[x] - Error: ${content}`);
+                    await interaction.reply({
+                        content
+                    });
+                });
+        }
     }
 }
