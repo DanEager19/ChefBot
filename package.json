@@ -7,8 +7,9 @@
     "start:dev": "ts-node src/deploy-commands.ts && ts-node src/index.ts",
     "start:prod": "node dist/deploy-commands.js && node dist/index.js",
     "build": "tsc --build",
-    "build:container": "docker build -t chefbot .",
-    "test": "jest"
+    "build:container": "docker build -t chef-bot .",
+    "test": "jest",
+    "run:container": "docker run chef-bot -d --name chef-bot"
   },
   "dependencies": {
     "@discordjs/builders": "^1.0.0",

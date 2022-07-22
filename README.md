@@ -3,27 +3,28 @@
     A Discord Bot that interfaces with my Kitchenware Request API as an endpoint for reservations. Also acts as a role reaction bot.
 </p>
 
-## Dependencies
+## Dependencies:
 ```sh
-This app requires Node.JS version 16 or later. 
+This app requires Node.JS version 16 or later OR the latest Docker engine.
 ```
 
-## Installation
+## Installation:
 ```sh
 git clone https://github.com/DanEager19/chef-bot
 cd chef-bot
 yarn install
 ```
 
-## Testing
+## Testing:
 ```sh
 yarn test
 ```
 
-## Usage
-Note that a the auth.json file needed to launch the app is NOT included. If you fork the project, you will need your own credentials. 
+## Usage:
+Note that a the environment variablesneeded to launch the app are NOT included. If you fork the project, you will need your own credentials. 
 
 ---
+### Build from files:
 Compile the project:
 ```sh
 yarn build
@@ -36,7 +37,16 @@ Running in production environments:
 ```sh
 yarn start:prod
 ```
-## Author
+### Or build from Dockerfile:
+Build the docker container:
+```sh
+yarn build:container
+```
+Run the container:
+```sh
+yarn run:container
+```
+## Author:
 
 **Daniel Eager**
 
