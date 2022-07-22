@@ -1,9 +1,17 @@
 import { Client,  Collection, Intents } from "discord.js";
-import { token } from "./auth.json";
 import { commandFiles } from "./commands";
 import { eventFiles } from './events';
+import dotenv from 'dotenv';
+dotenv.config()
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES,Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
+const client = new Client({ 
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MEMBERS, 
+		Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+	] 
+});
 const commands = new Collection();
 
 for (const command of commandFiles) {
@@ -35,4 +43,4 @@ client.on('interactionCreate', async (interaction: any) => {
 	}
 });
 
-client.login(token);
+typeof(process.env.TOKEN) === 'string' ? client.login(process.env.TOKEN) : console.log('[x] - Token not set!');
