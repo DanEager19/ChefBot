@@ -1,4 +1,4 @@
-import { eventFiles } from '../src/events'
+import { eventFiles } from '../src/bot/events'
 describe('Event Tests', () => {
     for (let event of eventFiles) {
         it(`${event.name} should return a slash event object.`, () => {

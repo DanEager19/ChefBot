@@ -1,4 +1,4 @@
-import { commandFiles } from '../src/commands'
+import { commandFiles } from '../src/bot/commands'
 describe('Command Tests', () => {
     for (let command of commandFiles) {
         it(`${command.data.name} should return a slash command object.`, () => {

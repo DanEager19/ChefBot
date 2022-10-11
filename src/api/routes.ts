@@ -19,9 +19,11 @@ export const Routes = (app: Application) => {
         .delete(reservations.removeItem);
 
     app.route('/attend')
-        .get(attendance.listAttendance)
         .post(attendance.attendMeeting);
     
+    app.route('/history')
+        .post(attendance.listAttendance);
+
     app.route('/register')
         .post(attendance.register);
 }

@@ -23,6 +23,25 @@ export const Attend = {
             });
         } else {
             const usertag = `${member?.user.username}#${member?.user.discriminator}`;
+            axios.post(`http://${process.env.EXPRESS_SERVER}/history`, {
+                userId: member.user.id,
+                userTag: usertag,
+            })
+            .then(async(res: any) => {
+                console.log(`[~] - Sent ${usertag} attendance history.`);
+                const content = res.data;
+                await interaction.reply({
+                    content
+                });
+            })
+            .catch(async (e: any) => {
+                let content: any;
+                e.response ? content = e.response.data : content = e.toString();
+                console.log(`[x] - ${content}`);
+                await interaction.reply({
+                    content
+                });
+            });
 
             axios.post(`http://${process.env.EXPRESS_SERVER}/attend`, {
                     userId: member.user.id,
