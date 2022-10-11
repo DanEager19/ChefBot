@@ -1,7 +1,10 @@
 import { AddItem } from "./commands/AddItem";
+import { Attend } from "./commands/Attend";
+import { AttendanceHistory } from "./commands/AttendanceHistory";
 import { GetItems } from "./commands/GetItems";
 import { GetReservations } from "./commands/GetReservations";
 import { MonadoMonday } from "./commands/MonadoMonday";
+import { Register } from "./commands/Register";
 import { RemoveItem } from "./commands/RemoveItem";
 import { Reserve } from "./commands/Reserve";
 import { Return } from "./commands/Return";
@@ -19,5 +22,8 @@ export const commandFiles = [
     Return,
     RoleReact,
     Twitter, 
-    UpdateItems
+    UpdateItems,
+    Attend,
+    AttendanceHistory,
+    Register,
 ];
