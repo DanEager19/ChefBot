@@ -16,7 +16,6 @@ resource "digitalocean_droplet" "cgc-services" {
       "export PATH=$PATH:/usr/bin",
       "apt-get update && apt-get upgrade -y",
       "apt-get install git ufw -y",
-      "git clone https://github.com/DanEager19/cgc-service-devops /root/cgc-service-devops",
       "apt-get install ca-certificates gnupg lsb-release curl -y",
       "mkdir -p /etc/apt/keyrings",
       "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
@@ -24,15 +23,13 @@ resource "digitalocean_droplet" "cgc-services" {
       "chmod a+r /etc/apt/keyrings/docker.gpg",
       "apt-get update",
       "apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y",
-      "git clone https://github.com/DanEager19/kitchenware-request-api  /root/cgc-service-devops/kitchenware-request-api",
-      "git clone https://github.com/DanEager19/chef-bot  /root/cgc-service-devops/chef-bot",
-      "touch /root/cgc-service-devops/kitchenware-request-api/.env",
-      "touch /root/cgc-service-devops/chef-bot/.env",
-      "echo TOKEN=${var.discord_api_token} >> /root/cgc-service-devops/chef-bot/.env",
-      "echo GUILD_ID=${var.guild_id} >> /root/cgc-service-devops/chef-bot/.env",
-      "echo CLIENT_ID${var.client_id} >> /root/cgc-service-devops/chef-bot/.env",
-      "echo SENDGRID_API_KEY=${var.sendgrid_api_key} >> /root/cgc-service-devops/kitchenware-request-api/.env",
-      "docker compose -f /root/cgc-service-devops/docker-compose.yml up --build -d "
+      "git clone https://github.com/DanEager19/chef-bot  /root/chef-bot",
+      "touch /root/chef-bot/.env",
+      "echo TOKEN=${var.discord_api_token} >> /root/chef-bot/.env",
+      "echo GUILD_ID=${var.guild_id} >> /root/chef-bot/.env",
+      "echo CLIENT_ID${var.client_id} >> /root/chef-bot/.env",
+      "echo SENDGRID_API_KEY=${var.sendgrid_api_key} >> /root/chef-bot/.env",
+      "docker compose -f /root/chef-bot/docker-compose.yml up --build -d "
     ]
   }
 }

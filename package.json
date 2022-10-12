@@ -6,6 +6,7 @@
   "scripts": {
     "api": "node dist/api/server.js",
     "bot": "node dist/bot/deploy-commands.js && node dist/bot/bot.js",
+    "start": "concurrently \"yarn api\" \"yarn bot\"",
     "build": "tsc --build",
     "test": "jest"
   },

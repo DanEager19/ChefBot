@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction } from "discord.js";
 const axios = require('axios')
 
 export const Attend = {
@@ -52,7 +51,7 @@ export const Attend = {
                         userTag: usertag,
                     })
                     .then(async (res: any) => {
-                        console.log(`[+] - ${usertag} attended a meeting on ${d}.`)
+                        console.log(`[~] - ${usertag} attended a meeting on ${d}.`)
                         await interaction.reply({
                             content: content,
                         })

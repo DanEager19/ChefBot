@@ -1,9 +1,9 @@
 version: '3.8'
 services:
   express-server:
-    container_name: express-server
+    container_name: chef-bot
     build:
-      context: ./api/
+      context: ./
       dockerfile: Dockerfile
     environment:
       - EXPRESS_SERVER=127.0.0.1:3000
