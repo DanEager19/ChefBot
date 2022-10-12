@@ -17,7 +17,6 @@ import { listAttendance } from './functions/listAttendance';
 
 export class Reservations {
 
-
     private client: Client = new Client({
         user: process.env.POSTGRES_USER,
         host: process.env.POSTGRES_HOST,
@@ -84,6 +83,7 @@ export class Reservations {
 }
 
 export class Attendance {
+
     private client: Client = new Client({
         user: process.env.POSTGRES_USER,
         host: process.env.POSTGRES_HOST,

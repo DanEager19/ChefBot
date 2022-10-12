@@ -13,7 +13,7 @@ export const Register = {
 
         const usertag = `${member?.user.username}#${member?.user.discriminator}`;
 
-        axios.post(`http://${process.env.EXPRESS_SERVER}/register`, {
+        await axios.post(`http://${process.env.EXPRESS_SERVER}/register`, {
                     userId: member.user.id,
                     userTag: usertag,
                     name: interaction.option.name,

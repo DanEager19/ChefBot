@@ -5,7 +5,7 @@ import { AttendMeetingRequest } from "../types"
 export const attendMeeting = async (client: Client, req: AttendMeetingRequest, res: Response) => {
     const data = req.body;
     const d = new Date();
-    await client.query(`UPDATE attendance SET meetingsAttended=meetingsAttended + 1, meetingsAttended = array_append(meetingsAttended, $1) WHERE userId=$2;`,
+    await client.query(`UPDATE attendance SET meetingsAttended=meetingsAttended + 1, meetingsHistory = array_append(meetingsHistory, $1) WHERE userId=$2;`,
         [d, data.userId],
         (e: Error, result: any) => {
             if (e) {

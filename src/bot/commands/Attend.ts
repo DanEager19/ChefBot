@@ -23,16 +23,50 @@ export const Attend = {
             });
         } else {
             const usertag = `${member?.user.username}#${member?.user.discriminator}`;
-            axios.post(`http://${process.env.EXPRESS_SERVER}/history`, {
+            const memberRole = member?.roles.cache.get('785951644457631744');
+
+            await axios.post(`http://${process.env.EXPRESS_SERVER}/history`, {
                 userId: member.user.id,
                 userTag: usertag,
             })
-            .then(async(res: any) => {
+            .then(async (res: any) => {
                 console.log(`[~] - Sent ${usertag} attendance history.`);
-                const content = res.data;
-                await interaction.reply({
-                    content
-                });
+                if (res.meetingsHistory[res.meetingsHistory.length - 1] === d) {
+                    await interaction.reply({
+                        content: 'You can\'t attend a meeting twice silly!',
+                        ephemeral: true
+                    });
+                    return;
+                } else {
+                    let content = `${usertag} attended today\'s meeting!`;
+
+                    if (res.data.meetingsAttended >= 2 && typeof(memberRole) !== 'undefined') {
+                        const role = interaction.message.guild.roles.cache.find((r: { id: string; }) => r.id === '785951644457631744');
+                        member.roles.add(role);
+                        console.log(`[+] - Added the ${role} role to ${usertag}.`);                        
+                        content += ' Congrats on the membership!'
+                    }
+
+                    await axios.post(`http://${process.env.EXPRESS_SERVER}/attend`, {
+                        userId: member.user.id,
+                        userTag: usertag,
+                    })
+                    .then(async (res: any) => {
+                        console.log(`[+] - ${usertag} attended a meeting on ${d}.`)
+                        await interaction.reply({
+                            content: content,
+                        })
+                    })
+                    .catch(async (e: any) => {
+                        let content: any;
+                        e.response ? content = e.response.data : content = e.toString();
+                        console.log(`[x] - ${content}`);
+                        await interaction.reply({
+                            content
+                        });
+                    });
+                }
+ 
             })
             .catch(async (e: any) => {
                 let content: any;
@@ -42,26 +76,6 @@ export const Attend = {
                     content
                 });
             });
-
-            axios.post(`http://${process.env.EXPRESS_SERVER}/attend`, {
-                    userId: member.user.id,
-                    userTag: usertag,
-                })
-                .then(async(res: any) => {
-                    console.log(`[+] - ${usertag} attended a meeting on ${d}.`)
-                    await interaction.reply({
-                        content: `${usertag} attended today\'s meeting!`,
-                    })
-                })
-                .catch(async (e: any) => {
-                    let content: any;
-                    e.response ? content = e.response.data : content = e.toString();
-                    console.log(`[x] - ${content}`);
-                    await interaction.reply({
-                        content
-                    });
-                });
-            
         }
     } 
 }

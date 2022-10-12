@@ -4,12 +4,10 @@
   "description": "Cooking and Gardening Club Discord bot reminder.<br />\r Currently Hosted on a Raspberry Pi<br />",
   "main": "index.ts",
   "scripts": {
-    "start:dev": "ts-node src/deploy-commands.ts && ts-node src/index.ts",
-    "start:prod": "node dist/deploy-commands.js && node dist/index.js",
+    "api": "node dist/api/server.js",
+    "bot": "node dist/bot/deploy-commands.js && node dist/bot/bot.js",
     "build": "tsc --build",
-    "build:container": "docker build -t chef-bot .",
-    "test": "jest",
-    "run:container": "docker run chef-bot -d --name chef-bot"
+    "test": "jest"
   },
   "dependencies": {
     "@discordjs/builders": "^1.0.0",
@@ -19,8 +17,8 @@
   },
   "devDependencies": {
     "@sendgrid/mail": "^7.7.0",
-    "@types/express": "^4.17.13",
     "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.13",
     "@types/jest": "^28.1.6",
     "@types/node": "^18.0.1",
     "@types/pg": "^8.6.5",
@@ -29,6 +27,7 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "eslint": "^8.19.0",
+    "express": "^4.18.2",
     "jest": "^28.1.3",
     "pg": "^8.7.3",
     "supertest": "^6.2.4",

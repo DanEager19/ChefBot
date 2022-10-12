@@ -14,7 +14,7 @@ export const listAttendance = async (client: Client, req: ListAttendanceRequest,
                 return;
             } else {
                 console.log(`[~] - ${data.userTag} requested their attendance history.`);
-                res.status(200).send(result);
+                res.status(200).send(result.rows[0]);
                 return;
             }
         }

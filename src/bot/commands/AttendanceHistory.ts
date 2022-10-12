@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction } from "discord.js";
+import { MessageEmbed, CommandInteraction } from "discord.js";
 const axios = require('axios')
 
 export const AttendanceHistory = {
@@ -11,13 +11,18 @@ export const AttendanceHistory = {
             .find((member: { id: string; }) => member.id === interaction.user.id);
         const usertag = `${member?.user.username}#${member?.user.discriminator}`;
 
-        axios.post(`http://${process.env.EXPRESS_SERVER}/history`, {
+        await axios.post(`http://${process.env.EXPRESS_SERVER}/history`, {
                 userId: member.user.id,
                 userTag: usertag,
             })
             .then(async(res: any) => {
+                let content: string ='';
+                const dates: any = res.data.meetingsHistory;
+
+                for (let date of dates) {
+                    content += `${date.slice(0,10)}\n`;
+                }
                 console.log(`[~] - Sent ${usertag} attendance history.`);
-                const content = res.data;
                 await interaction.reply({
                     content
                 });
