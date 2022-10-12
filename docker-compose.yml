@@ -6,6 +6,7 @@ services:
       context: ./api/
       dockerfile: Dockerfile
     environment:
+      - EXPRESS_SERVER=127.0.0.1:3000
       - POSTGRES_USER=user
       - POSTGRES_HOST=10.0.0.3
       - POSTGRES_PASSWORD=password
@@ -31,17 +32,6 @@ services:
     networks:
       vpcbr:
         ipv4_address: 10.0.0.3
-  chef-bot:
-    container_name: chef-bot
-    build:
-      context: ./bot/
-      dockerfile: Dockerfile
-    restart: always
-    environment:
-      - EXPRESS_SERVER=express-server:3000
-    networks:
-      vpcbr:
-        ipv4_address: 10.0.0.4
 networks:
   vpcbr:
     driver: bridge
