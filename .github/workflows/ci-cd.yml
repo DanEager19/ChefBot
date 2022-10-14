@@ -18,17 +18,17 @@ jobs:
           - 5432:5432
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x, 16.x, 18.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install Dependencies
+      - name: Install Dependencies for API
         run: yarn install
         working-directory: ./api
-      - name: Unit testing
+      - name: Unit Test Bot
         run: yarn test
         working-directory: ./api
         env:
@@ -36,20 +36,9 @@ jobs:
           POSTGRES_USER: user
           POSTGRES_PASSWORD: password
           POSTGRES_DATABASE: test
-  unit-test-bot:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install Dependencies
+      - name: Install Dependencies for Bot
         run: yarn install
         working-directory: ./bot
-      - name: Unit testing
+      - name: Unit Test Bot
         run: yarn test
         working-directory: ./bot

@@ -25,10 +25,10 @@ resource "digitalocean_droplet" "chef-bot" {
       "apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y",
       "git clone https://github.com/DanEager19/chef-bot  /root/chef-bot",
       "touch /root/chef-bot/bot/.env",
-      "touch /root/chef-bot/api/.env",
       "echo TOKEN=${var.discord_api_token} >> /root/chef-bot/bot/.env",
       "echo GUILD_ID=${var.guild_id} >> /root/chef-bot/bot/.env",
       "echo CLIENT_ID${var.client_id} >> /root/chef-bot/bot/.env",
+      "touch /root/chef-bot/api/.env",
       "echo SENDGRID_API_KEY=${var.sendgrid_api_key} >> /root/chef-bot/api/.env",
       "docker compose -f /root/chef-bot/docker-compose.yml up --build -d "
     ]
