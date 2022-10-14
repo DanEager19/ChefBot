@@ -1,5 +1,5 @@
 import { Application } from 'express';
-import { Routes } from '../api/routes';
+import { Routes } from './routes';
 import express from 'express';
 
 const app: Application = express();
