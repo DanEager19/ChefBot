@@ -1,6 +1,6 @@
 
 import request from 'supertest';
-import app from '../src/api/app';
+import app from '../src/app';
 
 describe('Testing all routes.', () => {
     it('POST /items - Should return status code 201 with a confirmation message of item creation.', async () => {

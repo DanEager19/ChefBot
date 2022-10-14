@@ -1,24 +1,36 @@
 version: '3.8'
 services:
-  express-server:
-    container_name: chef-bot
+  bot:
+    container_name: bot
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: ./bot
+      dockerfile: Dockerfile.bot
     environment:
-      - EXPRESS_SERVER=127.0.0.1:3000
-      - POSTGRES_USER=user
-      - POSTGRES_HOST=10.0.0.3
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DATABASE=api
+      - EXPRESS_SERVER=api:3000
     depends_on:
-      - pg
-    ports:
-      - '0.0.0.0:3000:3000'
+      - api
     restart: always
     networks:
       vpcbr:
         ipv4_address: 10.0.0.2
+  api:
+    container_name: api
+    build: 
+      context: ./api
+      dockerfile: Dockerfile.api
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_HOST=10.0.0.4
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DATABASE=api
+    ports:
+      - '0.0.0.0:3000:3000'
+    depends_on:
+      - pg
+    restart: always
+    networks:
+      vpcbr:
+        ipv4_address: 10.0.0.3
   pg:
     container_name: pg
     image: postgres:14-alpine
@@ -31,7 +43,7 @@ services:
       - 5432:5432
     networks:
       vpcbr:
-        ipv4_address: 10.0.0.3
+        ipv4_address: 10.0.0.4
 networks:
   vpcbr:
     driver: bridge
