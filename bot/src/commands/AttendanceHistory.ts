@@ -19,12 +19,9 @@ export const AttendanceHistory = {
                 let content: string ='';
                 const dates: any = res.data.meetingsHistory;
 
-                for (let date of dates) {
-                    content += `${date.slice(0,10)}\n`;
-                }
                 console.log(`[~] - Sent ${usertag} attendance history.`);
                 await interaction.reply({
-                    content
+                    dates
                 });
             })
             .catch(async (e: any) => {

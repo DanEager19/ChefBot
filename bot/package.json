@@ -4,7 +4,7 @@
   "description": "Cooking and Gardening Club Discord bot.",
   "main": "index.ts",
   "scripts": {
-    "bot": "node dist/bot/deploy-commands.js && node dist/bot/bot.js",
+    "bot": "node dist/deploy-commands.js && node dist/index.js",
     "build": "tsc --build",
     "test": "jest"
   },

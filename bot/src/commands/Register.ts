@@ -16,8 +16,8 @@ export const Register = {
         await axios.post(`http://${process.env.EXPRESS_SERVER}/register`, {
                     userId: member.user.id,
                     userTag: usertag,
-                    name: interaction.option.name,
-                    email: interaction.option.email,
+                    name: interaction.options.name,
+                    email: interaction.options.email,
                 })
                 .then(async(res: any) => {
                     console.log(`[+] - ${usertag} registered for attendance!`);

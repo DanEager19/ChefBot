@@ -102,7 +102,7 @@ export class Attendance {
                 name TEXT,
                 email TEXT,
                 meetingsAttended INT,
-                meetingsHistory DATE[],
+                meetingsHistory DATE[]
             );`, 
         (e: Error, result: any) => {
             if (e) {

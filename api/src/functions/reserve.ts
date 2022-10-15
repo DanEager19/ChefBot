@@ -6,7 +6,7 @@ import { sendEmail } from "./sendEmail";
 
 export const reserve = async (client: Client, req: ReserveRequest, res: Response): Promise<void> => {
     const data = req.body;
-    const email: RegExp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    const email: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (data.itemId === null) {
         res.status(403).send(`Item ID cannot be null.`);
         console.log(`[x] - Someone tried to reserve an item without an ID.`);
@@ -16,11 +16,11 @@ export const reserve = async (client: Client, req: ReserveRequest, res: Response
     } else if (data.itemId === NaN) {
         res.status(403).send("ID provided is not a number.");
         console.log('[x] - Someone just tried to input a non-number ID.')
-    } else if (!email.test(data.email)) {
-        res.status(403).send("Email provided is invalid.");
-        console.log('[x] - Someone just tried to input a bad email.')
+    // } else if (!email.test(data.email)) {
+    //     res.status(403).send("Email provided is invalid.");
+    //     console.log('[x] - Someone just tried to input a bad email.')
     } else {
-        const result = await client.query('SELECT * FROM items WHERE ID=$1', [data.itemId]);
+        const result = await client.query('SELECT * FROM items WHERE ID=$1;', [data.itemId]);
         const item: Item = result.rows[0];
 
         if (item === undefined) {
