@@ -19,6 +19,7 @@ export const register = async (client: Client, req: RegisterRequest, res: Respon
     //     res.status(403).send('Invalid email provided.');
     //     console.log('[x] - Someone tried to register for attendnace with a bad email.');
     } else {
+        console.log(data.name, data.email)
         await client.query(`INSERT INTO attendance(
             userId,
             userTag,

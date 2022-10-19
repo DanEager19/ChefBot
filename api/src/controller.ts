@@ -15,6 +15,7 @@ import { register } from './functions/register';
 import { attendMeeting } from './functions/attendMeeting';
 import { listAttendance } from './functions/listAttendance';
 import { attendanceInfo } from './functions/attendanceInfo';
+import { listAttendees } from './functions/listAttendees';
 
 export class Reservations {
 
@@ -99,7 +100,7 @@ export class Attendance {
             CREATE TABLE IF NOT EXISTS attendance(
                 ID SERIAL PRIMARY KEY,
                 userId TEXT,
-                userTag TEXT,
+                userTag TEXT UNIQUE,
                 name TEXT,
                 email TEXT,
                 isMember BOOLEAN,
@@ -121,6 +122,8 @@ export class Attendance {
     public register = async (req: RegisterRequest, res: Response) => register(this.client, req, res);
     
     public attendMeeting = async (req: AttendMeetingRequest, res: Response) => attendMeeting(this.client, req, res);
+
+    public listAttendees = async (req: Request, res: Response) => listAttendees(this.client, req, res)
     
     public listAttendance = async (req: ListAttendanceRequest, res: Response) => listAttendance(this.client, req, res);
 

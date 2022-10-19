@@ -23,6 +23,7 @@ export const Routes = (app: Application) => {
         .post(attendance.attendMeeting);
     
     app.route('/history')
+        .get(attendance.listAttendees)
         .post(attendance.listAttendance);
 
     app.route('/register')

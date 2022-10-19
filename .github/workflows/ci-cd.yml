@@ -53,3 +53,7 @@ jobs:
       - name: Unit testing
         run: yarn test
         working-directory: ./bot
+  deploy-to-digital-ocean:
+    runs-on: ubuntu-latest
+    
+  

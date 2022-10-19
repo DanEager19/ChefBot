@@ -21,11 +21,11 @@ export const attendanceInfo = async (client: Client, req: AttendanceInfoRequest,
                 const d = new Date();
                 const lastMeeting = userInfo.meetingsHistory.pop();
 
-                // if(lastMeeting === d.toString().slice(0,10)) {
-                //     res.status(403).send('You can\'t attend am meeting twice silly!');
-                //     console.log('[x] - Someone tried to attend a meeting twice!');
-                //     return;
-                // }
+                if(lastMeeting === d.toString().slice(0,10)) {
+                    res.status(403).send('You can\'t attend am meeting twice silly!');
+                    console.log('[x] - Someone tried to attend a meeting twice!');
+                    return;
+                }
 
                 if(userInfo.meetingsAttended >= 1 && userInfo.isMember === false) {
                     await client.query(`UPDATE attendance SET isMember=TRUE WHERE userId=$1`,

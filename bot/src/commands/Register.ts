@@ -12,12 +12,11 @@ export const Register = {
             .find((member: { id: string; }) => member.id === interaction.user.id);
 
         const usertag = `${member?.user.username}#${member?.user.discriminator}`;
-
         await axios.post(`http://${process.env.EXPRESS_SERVER}/register`, {
                     userId: member.user.id,
                     userTag: usertag,
-                    name: interaction.options.name,
-                    email: interaction.options.email,
+                    name: interaction.options.getString('name'),
+                    email: interaction.options.getString('email'),
                 })
                 .then(async(res: any) => {
                     console.log(`[+] - ${usertag} registered for attendance!`);

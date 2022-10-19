@@ -1,6 +1,7 @@
 import { AddItem } from "./commands/AddItem";
 import { Attend } from "./commands/Attend";
 import { AttendanceHistory } from "./commands/AttendanceHistory";
+import { GetAttendees } from "./commands/GetAttendees";
 import { GetItems } from "./commands/GetItems";
 import { GetReservations } from "./commands/GetReservations";
 import { MonadoMonday } from "./commands/MonadoMonday";
@@ -26,4 +27,5 @@ export const commandFiles = [
     Attend,
     AttendanceHistory,
     Register,
+    GetAttendees
 ];
