@@ -3,7 +3,7 @@ resource "digitalocean_droplet" "chef-bot" {
   name    = "chef-bot"
   region  = "nyc1"
   size    = "s-1vcpu-1gb"
-  ssh_keys = [ data.digitalocean_ssh_key.mint21-client-0.id ]
+  ssh_keys = [ data.digitalocean_ssh_key.mint21.id ]
   connection {
     host = self.ipv4_address
     user = "root"

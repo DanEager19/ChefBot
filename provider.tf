@@ -22,7 +22,7 @@ provider "digitalocean" {
   token = var.do_token
 }
 
-data "digitalocean_ssh_key" "win-10" {
-  name = "win-10"
+data "digitalocean_ssh_key" "mint21" {
+  name = "mint21"
 }
 
