@@ -16,12 +16,15 @@ export const AttendanceHistory = {
                 userTag: usertag,
             })
             .then(async(res: any) => {
-                let content: string ='';
-                const dates: any = res.data.meetingsHistory;
-
+                const dates = res.data;
+                const embededList = new MessageEmbed().setTitle(`Attendance for: ${usertag}`);
+                
+                for (let date in dates) {
+                    embededList.addField(`Meeting ${date}:`, `${dates[date]}`, false);
+                }
                 console.log(`[~] - Sent ${usertag} attendance history.`);
                 await interaction.reply({
-                    dates
+                    embeds: [embededList]
                 });
             })
             .catch(async (e: any) => {

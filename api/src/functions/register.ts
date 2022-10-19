@@ -25,14 +25,16 @@ export const register = async (client: Client, req: RegisterRequest, res: Respon
             name,
             email,
             meetingsAttended,
-            meetingsHistory
-        ) VALUES($1, $2, $3, $4, $5, $6);`, [
+            meetingsHistory,
+            isMember
+        ) VALUES($1, $2, $3, $4, $5, $6, $7);`, [
             data.userId,
             data.userTag,
             data.name,
             data.email,
             0,
             [],
+            false,
         ],
         (e: Error, result: any) => {
             if(e) {

@@ -18,6 +18,7 @@ export const Routes = (app: Application) => {
         .put(reservations.updateItem)
         .delete(reservations.removeItem);
 
+        
     app.route('/attend')
         .post(attendance.attendMeeting);
     
@@ -26,4 +27,7 @@ export const Routes = (app: Application) => {
 
     app.route('/register')
         .post(attendance.register);
+
+    app.route('/info')
+        .post(attendance.attendanceInfo);
 }

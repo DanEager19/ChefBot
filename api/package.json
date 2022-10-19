@@ -4,6 +4,7 @@
   "description": "API for chef-bot",
   "main": "index.ts",
   "scripts": {
+    "start": "npx ts-node ./src/index.ts",
     "api": "node dist/index.js",
     "build": "tsc --build",
     "test": "jest"

@@ -69,3 +69,15 @@ export interface ListAttendanceRequest extends Express.Request {
         userTag: string,
     }
 }
+export interface AttendanceInfoRequest extends Express.Request {
+    body: {
+        userId: string,
+        userTag: string,
+    }
+}
+
+export interface AttendanceInfo {
+    meetingsHistory: string[],
+    meetingsAttended: number,
+    isMember: boolean,
+}

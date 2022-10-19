@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { AddItemRequest, AttendMeetingRequest, ListAttendanceRequest, RegisterRequest, RemoveItemRequest, ReserveRequest, ReturnRequest, UpdateItemRequest } from './types';
+import { AddItemRequest, AttendanceInfoRequest, AttendMeetingRequest, ListAttendanceRequest, RegisterRequest, RemoveItemRequest, ReserveRequest, ReturnRequest, UpdateItemRequest } from './types';
 import { addItem } from './functions/addItem';
 import { updateItem } from './functions/updateItem';
 import { removeItem } from './functions/removeItem';
@@ -14,6 +14,7 @@ import { showAllReservations } from './functions/showAllReservations';
 import { register } from './functions/register';
 import { attendMeeting } from './functions/attendMeeting';
 import { listAttendance } from './functions/listAttendance';
+import { attendanceInfo } from './functions/attendanceInfo';
 
 export class Reservations {
 
@@ -101,8 +102,9 @@ export class Attendance {
                 userTag TEXT,
                 name TEXT,
                 email TEXT,
+                isMember BOOLEAN,
                 meetingsAttended INT,
-                meetingsHistory DATE[]
+                meetingsHistory TEXT[]
             );`, 
         (e: Error, result: any) => {
             if (e) {
@@ -121,4 +123,6 @@ export class Attendance {
     public attendMeeting = async (req: AttendMeetingRequest, res: Response) => attendMeeting(this.client, req, res);
     
     public listAttendance = async (req: ListAttendanceRequest, res: Response) => listAttendance(this.client, req, res);
+
+    public attendanceInfo = async (req: AttendanceInfoRequest, res: Response) => attendanceInfo(this.client, req, res);
 }

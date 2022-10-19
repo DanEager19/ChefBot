@@ -4,8 +4,7 @@ import { ListAttendanceRequest } from "../types"
 
 export const listAttendance = async (client: Client, req: ListAttendanceRequest, res: Response) => {
     const data = req.body;
-
-    await client.query(`SELECT meetingsAttended, meetingsHistory FROM attendance WHERE userId=$1;`,
+    await client.query(`SELECT meetingsHistory FROM attendance WHERE userId=$1;`,
         [data.userId],
         (e: Error, result: any) => {
             if(e) {
@@ -14,7 +13,7 @@ export const listAttendance = async (client: Client, req: ListAttendanceRequest,
                 return;
             } else {
                 console.log(`[~] - ${data.userTag} requested their attendance history.`);
-                res.status(200).send(result.rows[0]);
+                res.status(200).send(result.rows[0].meetingshistory);
                 return;
             }
         }
