@@ -99,10 +99,10 @@ export class Attendance {
         this.client.query(`
             CREATE TABLE IF NOT EXISTS attendance(
                 ID SERIAL PRIMARY KEY,
-                userId TEXT,
+                userId TEXT UNIQUE,
                 userTag TEXT UNIQUE,
                 name TEXT,
-                email TEXT,
+                email TEXT UNIQUE,
                 isMember BOOLEAN,
                 meetingsAttended INT,
                 meetingsHistory TEXT[]
