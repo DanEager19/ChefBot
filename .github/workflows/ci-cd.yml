@@ -65,7 +65,7 @@ jobs:
         run: 'echo "$SSH_KEY" > $HOME/.ssh/id_rsa'
         shell: 'bash'
         env:
-          SSH_KEY: ${{ secrets.PVT_KEY }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
