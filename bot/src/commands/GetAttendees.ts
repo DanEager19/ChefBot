@@ -15,7 +15,10 @@ export const GetAttendees = {
                 const rows: any = res.data;
 
                 for (let row of rows) {
-                    embededList.addField(`${row.name}`, `Usertag: ${row.usertag}\nEmail: ${row.email}\nMeetings Attended: ${row.meetingsattended}`);
+                    embededList.addFields({
+                        name:`${row.name}`, 
+                        value: `Usertag: ${row.usertag}\nEmail: ${row.email}\nMeetings Attended: ${row.meetingsattended}`
+                    });
                 }
 
                 console.log(`[~] - ${interaction.user.tag} requested all attendees.`)

@@ -15,7 +15,10 @@ export const GetItems = {
                 const rows: any = res.data;
 
                 for (let row of rows) {
-                    embededList.addField(`${row.name}`, `ID: ${row.id}\nDescription: ${row.description}\nInventory: ${row.inventory}`);
+                    embededList.addFields({
+                        name: `${row.name}`, 
+                        value: `ID: ${row.id}\nDescription: ${row.description}\nInventory: ${row.inventory}`
+                    });
                 }
                 
                 console.log(`[~] - ${interaction.user.tag} requested all items.`)

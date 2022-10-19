@@ -10,17 +10,17 @@ export const Attend = {
         const member = interaction.guild?.members.cache
             .find((member: { id: string; }) => member.id === interaction.user.id);
 
-        // if (d.getDay() !== 3) {
-        //     await interaction.reply({
-        //         content: 'It\'s not the specified meeting day silly!',
-        //         ephemeral: true
-        //     });
-        // } else if (d.getHours() !== 18) {
-        //     await interaction.reply({
-        //         content: 'It\'s not the specified meeting time silly!',
-        //         ephemeral: true
-        //     });
-        // } else {
+        if (d.getDay() !== 3) {
+            await interaction.reply({
+                content: 'It\'s not the specified meeting day silly!',
+                ephemeral: true
+            });
+        } else if (d.getHours() !== 18) {
+            await interaction.reply({
+                content: 'It\'s not the specified meeting time silly!',
+                ephemeral: true
+            });
+        } else {
             const usertag = `${member?.user.username}#${member?.user.discriminator}`;
 
             await axios.post(`http://${process.env.EXPRESS_SERVER}/info`, {
@@ -73,5 +73,5 @@ export const Attend = {
             });
         }
         
-    //} 
+    } 
 }

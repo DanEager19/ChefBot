@@ -20,7 +20,11 @@ export const AttendanceHistory = {
                 const embededList = new MessageEmbed().setTitle(`Attendance for: ${usertag}`);
                 
                 for (let date in dates) {
-                    embededList.addField(`Meeting ${date}:`, `${dates[date]}`, false);
+                    embededList.addFields({
+                        name: `Meeting ${date}:`, 
+                        value: `${dates[date]}`, 
+                        inline: false
+                    });
                 }
                 console.log(`[~] - Sent ${usertag} attendance history.`);
                 await interaction.reply({

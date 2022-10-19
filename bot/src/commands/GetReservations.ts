@@ -17,7 +17,10 @@ export const GetReservations = {
                 for (let row of rows) {
                     const startdate = row.startdate.slice(0,10)
                     const enddate = row.enddate.slice(0,10)
-                    embededList.addField(`${row.email}`, `ID: ${row.id}\nItem: ${row.itemname}\nStart Date: ${startdate}\nEnd Date: ${enddate}\nReturned? ${row.returned}`);
+                    embededList.addFields({
+                        name: `${row.email}`, 
+                        value: `ID: ${row.id}\nItem: ${row.itemname}\nStart Date: ${startdate}\nEnd Date: ${enddate}\nReturned? ${row.returned}`
+                    });
                 }
 
                 console.log(`[~] - ${interaction.user.tag} requested all reservations.`)

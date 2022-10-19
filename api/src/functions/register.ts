@@ -5,7 +5,7 @@ import { RegisterRequest } from "../types";
 export const register = async (client: Client, req: RegisterRequest, res: Response): Promise<void> => {
     const data = req.body;
     const name: RegExp = /^[a-zA-Z ]+$/
-    const email: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const email: RegExp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/
     if (data.name === null) {
         res.status(403).send('Name cannot be null.');
         console.log('[x] - Someone tried to register for attendance without a name.');
@@ -15,11 +15,10 @@ export const register = async (client: Client, req: RegisterRequest, res: Respon
     } else if (data.email === null) {
         res.status(403).send('Email cannot be null.');
         console.log('[x] - Someone tried to register for attendance without an email.');
-    // } else if (!email.test(data.name)) {
-    //     res.status(403).send('Invalid email provided.');
-    //     console.log('[x] - Someone tried to register for attendnace with a bad email.');
+    } else if (!email.test(data.email)) {
+        res.status(403).send('Invalid email provided.');
+        console.log('[x] - Someone tried to register for attendnace with a bad email.');
     } else {
-        console.log(data.name, data.email)
         await client.query(`INSERT INTO attendance(
             userId,
             userTag,
